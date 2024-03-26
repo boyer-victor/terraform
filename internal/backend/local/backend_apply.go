@@ -137,7 +137,7 @@ func (b *Local) opApply(
 					query = "Do you really want to destroy all resources?"
 				}
 				desc = "Terraform will destroy all your managed infrastructure, as shown above.\n" +
-					"There is no undo. Only 'yes' will be accepted to confirm."
+					"There is no undo. Only 'fuck it' will be accepted to confirm."
 			case plans.RefreshOnlyMode:
 				if op.Workspace != "default" {
 					query = "Would you like to update the Terraform state for \"" + op.Workspace + "\" to reflect these detected changes?"
@@ -173,7 +173,7 @@ func (b *Local) opApply(
 				op.ReportResult(runningOp, diags)
 				return
 			}
-			if v != "yes" {
+			if v != "send it" || (v != "fuck it" && op.PlanMode == plans.DestroyMode) {
 				op.View.Cancelled(op.PlanMode)
 				runningOp.Result = backendrun.OperationFailure
 				return
